@@ -1,0 +1,171 @@
+/* Infinite Tower Climber - Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Cinzel', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* Animations referenced by inline styles */
+@keyframes runeGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px #c89b3c, 0 0 20px rgba(200,155,60,0.5);
+    color: #e8c56a;
+  }
+  50% {
+    text-shadow: 0 0 25px #ffd700, 0 0 50px rgba(255,215,0,0.4), 0 0 80px rgba(200,155,60,0.2);
+    color: #ffd700;
+  }
+}
+
+@keyframes fadeUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes titleReveal {
+  0%   { opacity: 0; transform: translateY(-40px) scaleX(0.8); filter: blur(12px); }
+  100% { opacity: 1; transform: translateY(0) scaleX(1);      filter: blur(0);    }
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0) scale(1);    filter: brightness(1);   }
+  50%       { transform: translateY(-10px) scale(1.04); filter: brightness(1.3); }
+}
+
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1;   }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes crumbleFall {
+  0%   { opacity: 1; transform: scale(1)   rotate(0deg)  translateY(0);   filter: blur(0);    }
+  100% { opacity: 0; transform: scale(0.7) rotate(-8deg) translateY(40px); filter: blur(4px); }
+}
+
+@keyframes healthPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(200,60,60,0.6);  }
+  50%       { box-shadow: 0 0 12px rgba(255,80,80,0.9), 0 0 24px rgba(200,60,60,0.4); }
+}
+
+/* HUD bar base */
+.hud-bar-container {
+  position: relative;
+  background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(20,10,5,0.9));
+  border: 1px solid rgba(200,155,60,0.3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.hud-bar-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 8px,
+    rgba(0,0,0,0.15) 8px,
+    rgba(0,0,0,0.15) 9px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ornate buttons */
+.btn-ornate {
+  position: relative;
+  background: linear-gradient(135deg, rgba(30,15,5,0.95), rgba(50,25,10,0.9));
+  border: 1px solid rgba(200,155,60,0.5);
+  color: #e8c56a;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.btn-ornate::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(200,155,60,0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-ornate:hover::before { opacity: 1; }
+.btn-ornate:hover {
+  border-color: rgba(200,155,60,0.9);
+  box-shadow: 0 0 20px rgba(200,155,60,0.3), inset 0 0 20px rgba(200,155,60,0.05);
+  color: #ffd700;
+}
+.btn-ornate:active  { transform: scale(0.98); }
+.btn-ornate:disabled { cursor: not-allowed; }
+
+.btn-primary {
+  background: linear-gradient(135deg, #1a0a00, #3d1a00, #2a1000);
+  border: 1px solid rgba(200,155,60,0.8);
+  box-shadow: 0 4px 20px rgba(200,155,60,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2a1000, #5a2800, #3d1a00);
+  box-shadow: 0 4px 30px rgba(200,155,60,0.4), 0 0 50px rgba(200,155,60,0.15),
+              inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+/* Typography helpers */
+.cinzel        { font-family: 'Cinzel', serif; }
+.cinzel-deco   { font-family: 'Cinzel Decorative', cursive; }
+.cormorant     { font-family: 'Cormorant Garamond', serif; }
+
+.rune-glow { animation: runeGlow 2.8s ease-in-out infinite; }
+.orb-float { animation: orbFloat 3.5s ease-in-out infinite; }
+
+.gold-shimmer {
+  background: linear-gradient(90deg, #c89b3c 0%, #ffd700 40%, #fff8dc 55%, #ffd700 70%, #c89b3c 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 4s linear infinite;
+}
+
+.separator-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(200,155,60,0.5);
+}
+.separator-line::before,
+.separator-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200,155,60,0.4), transparent);
+}

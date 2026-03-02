@@ -1,0 +1,5 @@
+{
+  "name": "Infinite Tower Climber",
+  "description": "A vertical infinite platformer where you climb an endless tower, collect coins, and face evolving biomes as you go higher.",
+  "requestFramePermissions": []
+}
